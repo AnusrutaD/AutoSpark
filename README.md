@@ -152,12 +152,27 @@ classDiagram
     class Spot{
         - Integer: spotNumber
         - List~Slot~: slots
+        - SpotStatus: spotStatus
+    }
+    
+    class SpotStatus{
+        <<enumeration>>
+        AVAILABLE,
+        MENTAINANCE,
+        BOOKED
     }
     
     class Slot{
         - DateTime: start
         - DateTime: end
-        - Boolean: isBooked
+        - SlotStatus: slotStatus
+    }
+    
+    class SlotStatus{
+        <<enumeration>>
+        BOOKED
+        AVAILABLE
+        UNAVAILABLE
     }
     
     class Location{
@@ -223,6 +238,7 @@ classDiagram
     Shop "1" --* "*" Spot
     Shop "1" --* "1" Location
     Spot "1" --* "*" Slot
+    Slot "1" --* "1" SlotStatus
     Ticket "1" --o "1" User
     Ticket "1" --o "1" Vehicle
     Ticket "1" --o "1" Shop
@@ -235,6 +251,63 @@ classDiagram
     Payment "1" --o "1" PaymentStatus
     
 ```
+
+## API Design
+- User API
+  - GET /api/users
+  - GET /api/users/{id}
+  - POST /api/users
+  - PUT /api/users/{id}
+  - DELETE api/users/{id}
+- Vehicle
+  - GET /api/vehicles/{user_id}
+  - GET /api/vehicles/{id}
+  - POST /api/vehicles
+  - PUT /api/vehicles/{id}
+  - DELETE api/vehicles/{id}
+- Shop
+  - GET /api/shop/
+  - GET /api/shop/{id}
+  - POST /api/shop
+  - PUT /api/shop/{id}
+  - DELETE api/shop/{id}
+- Spot
+  - GET /api/spots/{shop_id}
+  - GET /api/spots/{id}
+  - POST /api/spots
+  - PUT /api/spots/{id}
+  - DELETE api/spots/{id}
+- Slot
+  - GET /api/slots/{spot_id}
+  - GET /api/slots/{time}
+  - GET /api/slots/{id}
+  - POST /api/slots
+  - PUT /api/slots/{id}
+  - DELETE api/slots/{id}
+- Ticket
+  - GET /api/tickets/
+  - GET /api/tickets/{id}
+  - POST /api/tickets
+  - PUT /api/tickets/{id}
+  - DELETE api/tickets/{id}
+- Location
+  - GET /api/locations/
+  - GET /api/locations/{id}
+  - POST /api/locations
+  - PUT /api/locations/{id}
+  - DELETE api/locations/{id}
+- Invoice
+  - GET /api/invoices/
+  - GET /api/invoices/{id}
+  - POST /api/invoices
+  - PUT /api/invoices/{id}
+  - DELETE api/invoices/{id}
+- Payment
+  - GET /api/payments/
+  - GET /api/payments/{id}
+  - POST /api/payments
+  - PUT /api/payments/{id}
+  - DELETE api/payments/{id}
 
 
 
