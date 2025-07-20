@@ -2,6 +2,8 @@
 
 A pure car washing service
 
+![Car Wash](src/main/resources/assets/images/car_wash.jpeg)
+
 ## Feature
 - User can SignUp/LogIn
 - View Profile
